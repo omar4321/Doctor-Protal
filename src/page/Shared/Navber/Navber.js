@@ -6,7 +6,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link, NavLink } from 'react-router-dom';
+import useAuth from './../../../hooks/useAuth';
 const Navber = () => {
+  const { user, logout } = useAuth();
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -24,7 +27,21 @@ const Navber = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Doctor Protal
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Link to="/appointment">
+              <Button color="inherit">Appointment</Button>
+            </Link>
+            {user?.email ? (
+              <Button onClick={logout} color="inherit">
+                Logout
+              </Button>
+            ) : (
+              <NavLink
+                style={{ textDecoration: 'none', color: 'white' }}
+                to="/login"
+              >
+                <Button color="inherit">Login</Button>
+              </NavLink>
+            )}
           </Toolbar>
         </AppBar>
       </Box>
