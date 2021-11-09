@@ -16,7 +16,7 @@ import { NavLink, useLocation, useHistory } from 'react-router-dom';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({});
-  const { user, loginUser, isLoading, authError } = useAuth();
+  const { user, loginUser, isLoading, authError, signInWithGoogle } = useAuth();
 
   const location = useLocation();
   const history = useHistory();
@@ -31,6 +31,11 @@ const Login = () => {
   const handleLoginSubmit = (e) => {
     loginUser(loginData.email, loginData.password, location, history);
     e.preventDefault();
+  };
+
+  // googlesingin
+  const handleGoogleSignIn = () => {
+    signInWithGoogle(location, history);
   };
   return (
     <Container>
@@ -74,6 +79,10 @@ const Login = () => {
             )}
             {authError && <Alert severity="error">{authError}</Alert>}
           </form>
+          <p>-------------------------------------------</p>
+          <Button onClick={handleGoogleSignIn} variant="contained">
+            Sign in with Google
+          </Button>
         </Grid>
         <Grid item xs={12} md={6}>
           <img style={{ width: '100%' }} src={login} alt="" />

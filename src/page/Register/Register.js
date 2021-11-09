@@ -10,15 +10,16 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import login from '../../images/login.png';
 import useAuth from '../../hooks/useAuth';
 const Register = () => {
   const [loginData, setLoginData] = useState({});
+  const history = useHistory();
 
   const { user, registerUser, isLoading, authError } = useAuth();
 
-  const handleOnChange = (e) => {
+  const handleonBlur = (e) => {
     const field = e.target.name;
     const value = e.target.value;
     const newLoginData = { ...loginData };
@@ -30,7 +31,7 @@ const Register = () => {
       alert('Your password did not match');
       return;
     }
-    registerUser(loginData.email, loginData.password);
+    registerUser(loginData.email, loginData.password, loginData.name, history);
     e.preventDefault();
   };
 
@@ -46,10 +47,19 @@ const Register = () => {
               <TextField
                 sx={{ width: '75%', m: 1 }}
                 id="standard-basic"
+                label="Your Full Name"
+                name="name"
+                type="text"
+                onBlur={handleonBlur}
+                variant="standard"
+              />
+              <TextField
+                sx={{ width: '75%', m: 1 }}
+                id="standard-basic"
                 label="Your Email"
                 name="email"
                 type="email"
-                onChange={handleOnChange}
+                onBlur={handleonBlur}
                 variant="standard"
               />
               <TextField
@@ -58,7 +68,7 @@ const Register = () => {
                 label="Your Password"
                 type="password"
                 name="password"
-                onChange={handleOnChange}
+                onBlur={handleonBlur}
                 variant="standard"
               />
               <TextField
@@ -67,7 +77,7 @@ const Register = () => {
                 label="ReType Your Password"
                 type="password"
                 name="password2"
-                onChange={handleOnChange}
+                onBlur={handleonBlur}
                 variant="standard"
               />
 
