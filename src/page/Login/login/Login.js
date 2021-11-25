@@ -75,13 +75,13 @@ const Login = () => {
             </NavLink>
             {isLoading && <CircularProgress />}
             {user?.email && (
-              <Alert severity="success">Login successfully!</Alert>
+              <Alert severity="success"> Login successfully!</Alert>
             )}
             {authError && <Alert severity="error">{authError}</Alert>}
           </form>
           <p>-------------------------------------------</p>
           <Button onClick={handleGoogleSignIn} variant="contained">
-            Sign in with Google
+            <i class="fab fa-google google-icon"> Sign in with Google</i>
           </Button>
         </Grid>
         <Grid item xs={12} md={6}>

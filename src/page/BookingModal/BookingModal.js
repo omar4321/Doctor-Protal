@@ -38,11 +38,12 @@ const BookingModal = ({
     const field = e.target.name;
     const value = e.target.value;
     const newinfo = { ...bookingData };
+    // console.log(newinfo);
     newinfo[field] = value;
     setBookingData(newinfo);
   };
   const handleBookingSubmit = (e) => {
-    // alert('submitting');
+    alert('submitting');
 
     // collect data
     const appointment = {
@@ -55,7 +56,7 @@ const BookingModal = ({
     // send to the server
     // console.log(appointment);
     // send to the server
-    fetch('http://localhost:5000', {
+    fetch('http://localhost:5000/appointments', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
